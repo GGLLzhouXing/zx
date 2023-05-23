@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="utf-8">
+	<title>注册页面</title>
+	<link rel="stylesheet" href='../css/comment.css'>
+<link rel="stylesheet" href="../css/join.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.15.9/theme-chalk/index.css">
+</head>
+<body>
+
+<div id="header">
+	<div>
+		<div class="right_float">
+			<!-- 未登录 -->
+			<a target="_blank"  href="/index.php?/userlogin" rel="nofollow">登录</a>|
+			<a target="_blank"  href="/index.php?/userjoin" rel="nofollow">免费注册</a>
+		</div>
+
+		<div class="center_text">
+			您好<strong></strong>，欢迎来到猫咪交易网
+
+		</div>
+	</div>
+	<div class="clearboth"></div>
+	<div class="center_1220">
+		<div id="nav_box">
+			<!--左边功能栏-->
+			<div class="nav_box_left">
+
+				<a target="_blank"   href="http://www.maomijiaoyi.com/">
+					首页		             	<div class="background_color"><span></span></div>
+				</a>
+
+				<a target="_blank"   href="http://www.maomijiaoyi.com/index.php?/chanpinliebiao_c_2.html">
+					买猫卖猫		             	<div class="background_color"><span></span></div>
+				</a>
+
+				<a target="_blank"   href="http://www.maomijiaoyi.com/index.php?/xinwenliebiao_3.html">
+					猫咪资讯		             	<div class="background_color"><span></span></div>
+				</a>
+
+				<a target="_blank"   href="http://www.maomijiaoyi.com/index.php?/xinwenliebiao_4.html">
+					选猫知识		             	<div class="background_color"><span></span></div>
+				</a>
+
+				<a target="_blank"   href="/index.php?/pinzhongdaquan_5.html">
+					猫咪品种		             	<div class="background_color"><span></span></div>
+				</a>
+			</div>
+			<!--右边功能栏-->
+			<div class="nav_box_right">
+				<a href="javascript:void(0);" rel="nofollow">
+					加入我们
+					<div class="background_color"><span></span></div>
+				</a>
+				<a href="/index.php?/xinwenliebiao_6.html" rel="nofollow">
+					联系我们
+					<div class="background_color"><span></span></div>
+				</a>
+				<a href="/index.php?/lianxiwomen.html" rel="nofollow">
+					关于我们
+					<div class="background_color"><span></span></div>
+				</a>
+				<a target="_blank" href="/index.php?/home/ReleasePost">
+					发布信息
+					<div class="background_color"><span></span></div>
+				</a>
+			</div>
+
+			<div class="logo">
+				<a href="/">
+					<img  src="../imgs/top_logo.png">
+				</a>
+			</div>
+
+		</div>
+		<div class="clearboth"></div>
+	</div>
+
+	<div style="height:80px"></div>
+	<!--注册表单-->
+	<div id="join_box" style="border: #eee solid 3px;">
+
+		<div id="Member_join">猫咪会员注册</div>
+
+		<div id="regForm">
+
+			<div class="form_box">
+				<span>用户名　：</span>
+
+				<input tabindex="1"  type="text"  name="username" id="username" v-model="user.username" placeholder="请输入用户名 " autocomplete="off">
+
+				<err id="nameshowerr"></err>
+
+			</div>
+
+			<div class="form_box">
+
+				<span>密　码　：</span>
+
+				<input tabindex="2" type="password" v-model="user.password"  placeholder="请输入密码，字母开头6~16字" autocomplete='new-password'>
+
+				<err id="pwdshowerr"></err>
+
+
+			</div>
+
+			<div class="form_box">
+
+				<span>确认密码：</span>
+
+				<input tabindex="3" type="password" v-model="confirmPs" name="confirmpassword" id="confirmpassword" placeholder="请输入确认密码" autocomplete='new-password'>
+
+				<err id="confirmpassworderr"></err>
+
+			</div>
+
+			<div class="form_box">
+
+				<span>联系电话：</span>
+
+				<input tabindex="4" type="text" v-model="user.phone"   placeholder="请输入联系电话" autocomplete="off">
+
+				<err id="phoneshowerr"></err>
+
+			</div>
+
+			<div class="form_box">
+
+				<span>电子邮件：</span>
+
+				<input tabindex="5" type="text" v-model="user.email"  placeholder="请输入邮箱" autocomplete="off">
+
+				<err id="emashowerr"></err>
+
+			</div>
+
+			<div class="form_box">
+
+				<span>验证码　：</span>
+
+				<input tabindex="6"  v-model="yzm" type="text"  name="VerificationCode" id="VerificationCode" placeholder="请输入验证码" style="width: 105px;" autocomplete="off">
+
+				<img :src="yzmUrl" alt="" id="tab_yzmimg_src">
+
+				<span id="tab_yzmimg" @click="changeValidateCode()">看不清楚？换一张</span>
+
+				<script>
+					document.getElementById("tab_yzmimg").onclick=function(){
+						document.getElementById("tab_yzmimg_src").src='/index.php?/checkCode/index/'+Math.random();
+					}
+				</script>
+
+				<err id="yzmerr"></err>
+
+			</div>
+
+
+			<!-- 注册条款 -->
+
+
+			<div class="form_box">
+
+				<div class="cen_box">
+					<input tabindex="7"  type="checkbox" id="agree_clause" value='1' name="clause" style="width: 15px;height: 15px;float: left;margin-top: 12px;margin-right: 20px;cursor: pointer;">
+
+					<span style="color: #666;font-size: 14px;">阅读并完全同意 <a href="regist_clause.html" id="btn_policy" style="color: #fd871d;cursor: pointer;">条款内容</a></span>
+					<err id="tkerr"></err>
+
+				</div>
+
+			</div>
+			<!-- submit提交 -->
+
+				<button id="submit_form" style="display: block; border:none "  @click="register()" >提交申请</button>
+			<img id="loadimg" src="../imgs/loading-0.gif" style=" display: block; width: 60px; height: 24px; margin: 0 auto; margin-top: 60px; margin-bottom: 19px; display: none; ">
+		</div>
+
+	</div>
+	<!-- 条款内容tk_info -->
+	<script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+	<!-- import JavaScript -->
+	<script src="https://cdn.staticfile.org/element-ui/2.15.9/index.min.js"></script>
+	<script src="https://cdn.staticfile.org/axios/0.21.1/axios.min.js"></script>
+
+	<script type="text/javascript">
+		let v=new Vue({
+			el: "#regForm",
+			data: {
+				yzm:"",
+				yzmUrl:'/happycaptcha/verifyCode',
+				userHs:true,
+				user:
+					{username:'',password:'',phone:'',email:''},
+				confirmPs:''
+			},
+			methods:{
+				checkYzm(){
+					console.log("验证码:",this.yzm)
+					axios.post("/happycaptcha/checkYzm",this.yzm).then(res=>{
+						console.log(res.status)
+						if(res.status !==200){
+							this.$message.error("验证码错误")
+							this.userHs = false;
+						}
+					})
+				},
+				changeValidateCode(){
+					var timenow=new Date().getTime();
+					this.yzmUrl="/happycaptcha/verifyCode?d="+timenow;
+				},
+				register(){
+					this.checkYzm()
+					let checkUsername  = new RegExp( /^[^\s'"\.,，。!@#$%*&]+$/);
+					let checkEmail = new RegExp(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/);
+					if(this.user.password!==this.confirmPs){
+						this.$message.error("俩次密码不一致")
+						this.userHs=false;
+					}
+					if(this.user.username.length<3||this.user.username.length>12){
+						this.$message.error("用户名长度不正确")
+						this.userHs=false
+					}
+					if(  !(checkUsername.test(this.user.username))  ) {
+						this.$message.error('用户名错误');
+						this.userHs=false
+					}
+					if(!(checkEmail.test(this.user.email))){
+						this.$message.error("邮箱格式错误")
+						this.userHs=false
+					}
+					if(this.user.password.length<=0){
+						this.$message.error("密码不能为空")
+						this.userHs=false
+					}
+					if(this.userHs===true){
+						axios.post("/users/register",this.user).then(response=>{
+							console.log(response)
+							if(response.status===200){
+								this.$message.success("注册成功!")
+								window.location.href="login.html"
+							}
+								}
+
+						)
+					}
+				}
+			}
+		})
+	</script>
+	<div style="height: 80px;"></div>
+
+
+	<div id="footer">
+
+		<div class="logo">
+			<div class="logo_kuang">
+				<div>
+					<a href="http://www.maomijiaoyi.com/">
+						<img alt="猫咪交易网" title="猫咪交易网" src="../imgs/index_logo.png">
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="link">
+
+			<a target="_blank" href="/index.php?/lianxiwomen.html" rel="nofollow">
+				关于我们
+			</a>|
+
+			<a target="_blank" href="/index.php?/xinwenliebiao_6.html" rel="nofollow">
+				联系我们
+			</a>|
+
+			<a target="_blank" href="/index.php?/page_friendlink.html">
+				友情链接
+			</a>|
+
+			<a href="javascript:void(0);" rel="nofollow">
+				广告服务
+			</a>|
+
+			<a target="_blank" href="/index.php?/page_copyright.html" rel="nofollow">
+				版权说明
+			</a>|
+
+			<a href="/index.php?/updata.html">
+				最近更新
+			</a>|
+
+			<a href="/index.php?/map.html" rel="nofollow">
+				网站地图
+			</a>|
+
+			<a target="_blank" href="/index.php?/page_suggest.html" rel="nofollow">
+				意见反馈
+			</a>
+
+		</div>
+
+		<div class="banquan">
+			<div class="center_1220">
+				版权所有：猫咪交易网 www.maomijiaoyi.com  13817232290		</div>
+		</div>
+
+		<div class="banquan">
+			<div class="center_1220">
+				【免责声明：本站所有猫猫交易信息内容系用户自行发布，其真实性、合法性由发布人负责，本站不提供任何保证，亦不承担任何法律责任！】		</div>
+		</div>
+
+		<div class="banquan">
+			<div class="center_1220">
+				<a style="color: #FFF;" href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank">
+					<img src="../imgs/foot_link3.png">
+					沪ICP备18022709号-1 		</a>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

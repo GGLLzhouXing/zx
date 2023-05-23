@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.highedu.cat.mapper.UserMapper" >
+    <!--添加用户-->
+    <insert id="addUser" parameterType="UserRegDTO" >
+        INSERT INTO user (username,password,email,phone) VALUES (#{username},#{password},#{email},#{phone})
+    </insert>
+    <select id="checkUsername" parameterType="String" resultType="int">
+        Select count(*) total from user where username=#{username}
+    </select>
+    <select id="getByUsername" resultType="UserLogInfoVO">
+        SELECT id, username, password
+        FROM user
+        WHERE username =#{username}
+    </select>
+    </mapper>

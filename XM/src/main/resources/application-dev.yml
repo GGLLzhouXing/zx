@@ -1,0 +1,24 @@
+# 应用服务web端口号
+server:
+  port: 9080
+
+# 数据库连接配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/maomi?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&rewriteBatchedStatements=true
+    username: root
+    password: root
+  security:
+     user:
+       name: tom
+       password: $2a$10$8mnzki/4EUWmsEucKumXOeUWCTcCcR01DDDj80TrsWaUanUm.8mB2
+
+# 日志配置
+logging:
+  level:
+    cn.highedu.cat: debug
+jwt:
+  secret-key: cat_key1234567890
+  duration-in-minute: 60
+
